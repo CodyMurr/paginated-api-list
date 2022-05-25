@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { fetchData } from '../utilities/api';
-import Pagination from '../components/Pagination';
-import Data from '../components/Data';
+import Pagination from './Pagination';
+import Data from './Data';
 
-export default function ApiExplorer() {
+export default function ApiList() {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);

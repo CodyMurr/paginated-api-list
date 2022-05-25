@@ -4,6 +4,7 @@ import {
 	FaAngleDoubleLeft,
 	FaAngleDoubleRight,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function Pagination({
 	currentPage,
@@ -39,16 +40,19 @@ export default function Pagination({
 			/>
 			<ul className='h-full w-9/12 flex flex-row justify-evenly items-center'>
 				{pageNav.map((num) => (
-					<li
-						key={num}
+					<Link
+						to='#'
 						className={
 							num === currentPage &&
-							' flex flex-row justify-center items-center bg-slate-900 text-xl text-slate-100 border-solid rounded-2xl border-slate-700 shadow-md w-1/12 h-full'
-						}>
-						<a href='!#' onClick={() => paginate(num)}>
+							'flex flex-row justify-center items-center bg-slate-900 text-xl text-slate-100 border-solid rounded-2xl border-slate-700 shadow-md w-1/12 h-full'
+						}
+						onClick={() => paginate(num)}>
+						<li
+							key={num}
+							className='h-full w-full flex flex-row justify-center items-center'>
 							{num}
-						</a>
-					</li>
+						</li>
+					</Link>
 				))}
 			</ul>
 
