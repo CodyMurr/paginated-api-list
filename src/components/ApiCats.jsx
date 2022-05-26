@@ -1,4 +1,5 @@
 import { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchData } from '../utilities/api';
 import ApiContext from '../context/ApiContext';
 
@@ -25,9 +26,14 @@ export default function ApiCats() {
 								(cat) => cat[0].toLowerCase() === c.toLowerCase(),
 							)
 							.map((cat) => (
-								<li className='text-2xl m-10' key={cat}>
-									{cat}
-								</li>
+								<Link
+									to={`/api/categories/${cat
+										.split(' ')[0]
+										.toLowerCase()}`}>
+									<li className='text-2xl m-10' key={cat}>
+										{cat}
+									</li>
+								</Link>
 							))}
 					</ul>
 				</section>

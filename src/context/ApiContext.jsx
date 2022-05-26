@@ -13,6 +13,7 @@ export function ApiProvider({ children }) {
 	const [pageNav, setPageNav] = useState(
 		range(currentPage, currentPage + 5),
 	);
+	const [categData, setCategData] = useState([]);
 
 	const idxOfLast = currentPage * resultsPerPage;
 	const idxOfFirst = idxOfLast - resultsPerPage;
@@ -33,6 +34,11 @@ export function ApiProvider({ children }) {
 
 	function getCategoryData(cats) {
 		setCategories(cats.categories);
+		setLoading(false);
+	}
+
+	function getApisByCat(newList) {
+		setCategData(newList.entries);
 		setLoading(false);
 	}
 
@@ -64,10 +70,12 @@ export function ApiProvider({ children }) {
 				idxOfLast,
 				currentData,
 				categories,
+				categData,
 				paginate,
 				getAPIData,
 				getCategoryData,
 				catSort,
+				getApisByCat,
 			}}>
 			{children}
 		</ApiContext.Provider>

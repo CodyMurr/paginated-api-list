@@ -5,6 +5,7 @@ import ApiPage from './pages/ApiPage';
 import HomePage from './pages/HomePage';
 import ApiList from './components/ApiList';
 import ApiCats from './components/ApiCats';
+import CategoryDetail from './components/CategoryDetail';
 
 export default function App() {
 	return (
@@ -17,6 +18,10 @@ export default function App() {
 				<Route path='/api' element={<ApiPage />}>
 					<Route path='/api/list' element={<ApiList />} />
 					<Route path='/api/categories' element={<ApiCats />} />
+					<Route
+						path='/api/categories/:category'
+						element={<CategoryDetail />}
+					/>
 				</Route>
 			</Routes>
 		</div>
