@@ -5,7 +5,7 @@ import ApiPage from './pages/ApiPage';
 import HomePage from './pages/HomePage';
 import ApiList from './components/ApiList';
 import ApiCats from './components/ApiCats';
-import CategoryDetail from './components/CategoryDetail';
+import Category from './components/Category';
 
 export default function App() {
 	return (
@@ -20,7 +20,7 @@ export default function App() {
 					<Route path='/api/categories' element={<ApiCats />} />
 					<Route
 						path='/api/categories/:category'
-						element={<CategoryDetail />}
+						element={<Category />}
 					/>
 				</Route>
 			</Routes>

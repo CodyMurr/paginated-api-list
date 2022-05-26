@@ -26,10 +26,7 @@ export default function ApiCats() {
 								(cat) => cat[0].toLowerCase() === c.toLowerCase(),
 							)
 							.map((cat) => (
-								<Link
-									to={`/api/categories/${cat
-										.split(' ')[0]
-										.toLowerCase()}`}>
+								<Link to={`/api/categories/${cat}`}>
 									<li className='text-2xl m-10' key={cat}>
 										{cat}
 									</li>
