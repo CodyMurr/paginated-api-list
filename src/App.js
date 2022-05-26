@@ -10,6 +10,7 @@ export default function App() {
 	return (
 		<div className='container h-max w-full flex flex-col items-center justify-evenly'>
 			<Navbar />
+
 			<Routes>
 				<Route path='/' element={<HomePage />} />
 				<Route path='/about' element={<AboutPage />} />

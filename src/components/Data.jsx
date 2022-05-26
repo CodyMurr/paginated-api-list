@@ -1,10 +1,14 @@
-export default function Data({ data, loading }) {
+import ApiContext from '../context/ApiContext';
+import { useContext } from 'react';
+
+export default function Data() {
+	const { currentData, loading } = useContext(ApiContext);
 	if (loading) {
 		return <h2>Loading...</h2>;
 	}
 	return (
 		<div className='container w-full h-full p-1 flex flex-col justify-evenly items-center overflow-scroll'>
-			{data.map((d, idx) => (
+			{currentData.map((d, idx) => (
 				<a
 					className='p-3 w-4/5 h-40 border-solid border-2 border-amber-700 rounded-lg hover:bg-amber-500 hover:scale-125 hover:duration-300 hover:text-neutral-50'
 					href={d.Link}

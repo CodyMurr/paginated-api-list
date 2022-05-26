@@ -4,26 +4,16 @@ import {
 	FaAngleDoubleLeft,
 	FaAngleDoubleRight,
 } from 'react-icons/fa';
+import ApiContext from '../context/ApiContext';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Pagination({
-	currentPage,
-	resultsPerPage,
-	totalResults,
-	totalPages,
-	pageNav,
-	paginate,
-}) {
-	const pageNumbers = [];
-	for (
-		let i = 1;
-		i <= Math.ceil(totalResults / resultsPerPage);
-		i++
-	) {
-		pageNumbers.push(i);
-	}
+export default function Pagination() {
+	const { currentPage, totalPages, pageNav, paginate } =
+		useContext(ApiContext);
+
 	return (
-		<nav className='container h-16 w-full bg-orange-500 flex flex-row items-center justify-evenly items-center fixed bottom-0'>
+		<nav className='container h-16 w-full bg-orange-500 flex flex-row justify-evenly items-center fixed bottom-0'>
 			{currentPage > 1 && (
 				<FaAngleDoubleLeft
 					className='cursor-pointer'
