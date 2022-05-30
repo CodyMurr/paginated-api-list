@@ -8,15 +8,19 @@ export default function App() {
 
 	return (
 		<div className='h-max w-full flex flex-col items-center justify-evenly'>
-			<header>
-				<nav>
+			<header className='container flex justify-center'>
+				<nav className='w-3/5 flex flex-row justify-center'>
 					<p
-						className={content === 'api' && 'underline'}
+						className={`${
+							content === 'api' && 'underline'
+						} text-xl text-center w-1/2`}
 						onClick={() => setContent('api')}>
 						All Apis
 					</p>
 					<p
-						className={content === 'category' && 'underline'}
+						className={`${
+							content === 'category' && 'underline'
+						} text-xl text-center w-1/2`}
 						onClick={() => setContent('category')}>
 						Categories
 					</p>
