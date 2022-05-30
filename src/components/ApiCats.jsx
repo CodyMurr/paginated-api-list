@@ -1,14 +1,35 @@
 import { useEffect, useContext } from 'react';
 import ApiContext from '../context/ApiContext';
 
+const BASE_URL = 'https://api.publicapis.org/categories';
+
 export default function ApiCats() {
-	const { categories, getCategoryData, catSort } =
+	const { loading, categories, setLoading, setCategories } =
 		useContext(ApiContext);
-	// useEffect(() => {
-	// 	fetchData('categories', getCategoryData);
-	// });
+	useEffect(() => {
+		async function fetchCategories() {
+			setLoading(true);
+			const res = await fetch(BASE_URL);
+			const data = await res.json();
+			setCategories(data.categories);
+			setLoading(false);
+		}
+		fetchCategories();
+	}, []);
+
+	function catSort() {
+		const arr = [];
+		categories.forEach((cat) => {
+			arr.push(cat[0]);
+		});
+		const catSet = new Set(arr);
+		const uniqueLetterArr = Array.from(catSet);
+		return uniqueLetterArr.sort();
+	}
 
 	const sortedCats = catSort();
+
+	if (loading) return <h2>Loading...</h2>;
 
 	return (
 		<section className='grid grid-cols-4 w-full h-max'>
@@ -24,10 +45,7 @@ export default function ApiCats() {
 								(cat) => cat[0].toLowerCase() === c.toLowerCase(),
 							)
 							.map((cat) => (
-								<a
-									href={`/api/categories/${cat}`}
-									rel='noreferrer'
-									target='_blank'>
+								<a href='!#' rel='noreferrer' target='_blank'>
 									<li className='text-2xl m-10' key={cat}>
 										{cat}
 									</li>

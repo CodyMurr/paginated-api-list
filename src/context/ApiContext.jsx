@@ -29,16 +29,6 @@ export function ApiProvider({ children }) {
 		}
 	}
 
-	function catSort() {
-		const arr = [];
-		categories.forEach((cat) => {
-			arr.push(cat[0]);
-		});
-		const catSet = new Set(arr);
-		const uniqueLetterArr = Array.from(catSet);
-		return uniqueLetterArr.sort();
-	}
-
 	function range(start, end) {
 		let length = end - start + 1;
 		return Array.from({ length }, (_, idx) => idx + start);
@@ -57,12 +47,11 @@ export function ApiProvider({ children }) {
 				idxOfLast,
 				currentData,
 				categories,
-				// categData,
 				setData,
 				setLoading,
 				setTotalPages,
+				setCategories,
 				paginate,
-				catSort,
 			}}>
 			{children}
 		</ApiContext.Provider>
