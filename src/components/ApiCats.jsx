@@ -1,14 +1,12 @@
 import { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { fetchData } from '../utilities/api';
 import ApiContext from '../context/ApiContext';
 
 export default function ApiCats() {
 	const { categories, getCategoryData, catSort } =
 		useContext(ApiContext);
-	useEffect(() => {
-		fetchData('categories', getCategoryData);
-	});
+	// useEffect(() => {
+	// 	fetchData('categories', getCategoryData);
+	// });
 
 	const sortedCats = catSort();
 
@@ -26,11 +24,14 @@ export default function ApiCats() {
 								(cat) => cat[0].toLowerCase() === c.toLowerCase(),
 							)
 							.map((cat) => (
-								<Link to={`/api/categories/${cat}`}>
+								<a
+									href={`/api/categories/${cat}`}
+									rel='noreferrer'
+									target='_blank'>
 									<li className='text-2xl m-10' key={cat}>
 										{cat}
 									</li>
-								</Link>
+								</a>
 							))}
 					</ul>
 				</section>

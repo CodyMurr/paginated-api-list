@@ -8,38 +8,25 @@ export function ApiProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [resultsPerPage, setResultsPerPage] = useState(5);
+	const [totalPages, setTotalPages] = useState();
 
-	const [totalPages, setTotalPages] = useState(data.length);
 	const [pageNav, setPageNav] = useState(
 		range(currentPage, currentPage + 5),
 	);
-	const [categData, setCategData] = useState([]);
+	// const [categData, setCategData] = useState([]);
 
 	const idxOfLast = currentPage * resultsPerPage;
 	const idxOfFirst = idxOfLast - resultsPerPage;
 	const currentData = data.slice(idxOfFirst, idxOfLast);
 
-	function paginate(pageNum) {
+	function paginate(pageNum, sibCt) {
 		setCurrentPage(pageNum);
-		pageNum >= totalPages
-			? setPageNav(range(pageNum - 5, pageNum))
-			: setPageNav(range(pageNum, pageNum + 5));
-	}
 
-	function getAPIData(newData) {
-		setData(newData.entries);
-		setTotalPages(Math.ceil(data.entries.length / resultsPerPage));
-		setLoading(false);
-	}
+		setPageNav(range(pageNum, pageNum + sibCt));
 
-	function getCategoryData(cats) {
-		setCategories(cats.categories);
-		setLoading(false);
-	}
-
-	function getApisByCat(newList) {
-		setCategData(newList.entries);
-		setLoading(false);
+		if (pageNum >= totalPages - sibCt && pageNum <= totalPages) {
+			setPageNav(range(totalPages - sibCt, totalPages));
+		}
 	}
 
 	function catSort() {
@@ -70,12 +57,12 @@ export function ApiProvider({ children }) {
 				idxOfLast,
 				currentData,
 				categories,
-				categData,
+				// categData,
+				setData,
+				setLoading,
+				setTotalPages,
 				paginate,
-				getAPIData,
-				getCategoryData,
 				catSort,
-				getApisByCat,
 			}}>
 			{children}
 		</ApiContext.Provider>
