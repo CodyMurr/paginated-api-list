@@ -13,25 +13,34 @@ export function ApiProvider({ children }) {
 	const [pageNav, setPageNav] = useState(
 		range(currentPage, currentPage + 5),
 	);
-	// const [categData, setCategData] = useState([]);
 
 	const idxOfLast = currentPage * resultsPerPage;
 	const idxOfFirst = idxOfLast - resultsPerPage;
 	const currentData = data.slice(idxOfFirst, idxOfLast);
 
-	function paginate(pageNum, sibCt) {
+	function paginate(pageNum) {
 		setCurrentPage(pageNum);
+		setPageNav(range(pageNum, pageNum + 10));
 
-		setPageNav(range(pageNum, pageNum + sibCt));
-
-		if (pageNum >= totalPages - sibCt && pageNum <= totalPages) {
-			setPageNav(range(totalPages - sibCt, totalPages));
+		if (pageNum >= totalPages - 10 && pageNum <= totalPages) {
+			setPageNav(range(totalPages - 10, totalPages));
 		}
 	}
 
 	function range(start, end) {
 		let length = end - start + 1;
 		return Array.from({ length }, (_, idx) => idx + start);
+	}
+
+	function stepArray(start, end, step) {
+		return Array.from(
+			{ length: (end - start) / step + 1 },
+			() => (start += step) - step,
+		);
+	}
+
+	function changePgSize(newAmt) {
+		setResultsPerPage(newAmt);
 	}
 
 	return (
@@ -52,6 +61,9 @@ export function ApiProvider({ children }) {
 				setTotalPages,
 				setCategories,
 				paginate,
+				range,
+				stepArray,
+				changePgSize,
 			}}>
 			{children}
 		</ApiContext.Provider>

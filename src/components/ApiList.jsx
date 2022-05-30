@@ -2,6 +2,7 @@ import { useEffect, useContext } from 'react';
 import Pagination from './Pagination';
 import Data from './Data';
 import ApiContext from '../context/ApiContext';
+import Dropdown from '../custom/Dropdown';
 const BASE_URL = 'https://api.publicapis.org/entries';
 
 export default function ApiList() {
@@ -11,7 +12,8 @@ export default function ApiList() {
 		setData,
 		setLoading,
 		setTotalPages,
-		getAPIData,
+		stepArray,
+		changePgSize,
 	} = useContext(ApiContext);
 
 	useEffect(() => {
@@ -30,8 +32,15 @@ export default function ApiList() {
 	if (loading) return <h2>Loading...</h2>;
 
 	return (
-		<div className='h-screen w-full flex flex-col items-center justify-evenly relative'>
-			<Data />
+		<div className='w-full h-full flex flex-col items-center relative'>
+			<Dropdown
+				options={stepArray(5, 20, 5)}
+				default={resultsPerPage}
+				message='Results Per Page'
+			/>
+			<section className='w-full flex flex-wrap justify-evenly'>
+				<Data />
+			</section>
 			<Pagination />
 		</div>
 	);
